@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:background="#333333"
+              >
+    <Button
+        android:id="@+id/btn_back"
+        android:background="@drawable/bg_bake_white"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:text="dayGo"
+        android:textColor="#ecf0f1"
+        android:textSize="30sp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_go"
+        android:background="@drawable/bg_more_white"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>
