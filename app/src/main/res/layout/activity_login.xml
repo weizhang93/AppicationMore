@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:gravity="center"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <EditText
+    <com.example.kimo.daygo.ui.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
+    </com.example.kimo.daygo.ui.TitleLayout>
+    <LinearLayout
+        android:orientation="vertical"
         android:gravity="center"
-        android:hint="name"
-        android:text="张伟"
-        android:id="@+id/name"
-        />
-    <EditText
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="852456"
-        android:hint="password"
-        android:id="@+id/pass"
-        />
+        android:layout_height="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="name"
+            android:text="张伟"
+            android:id="@+id/name"
+            />
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:text="852456"
+            android:hint="password"
+            android:id="@+id/pass"
+            />
 
-    <Button
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign in"
-        android:id="@+id/submit"
-        />
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:id="@+id/submit"
+            />
+
+    </LinearLayout>
+
+
 </LinearLayout>

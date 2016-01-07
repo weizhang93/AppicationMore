@@ -1,6 +1,8 @@
 package com.example.kimo.daygo.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +16,10 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/28 0028.
+ * 登录Activity
+ * 2016/01/06 添加姓名暂存
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements View.OnClickListener{
 
     private List<String> list = new ArrayList<>();
     private EditText mName;
@@ -26,22 +30,45 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initView();
+    }
+
+    private void initView() {
         mName = (EditText) findViewById(R.id.name);
         mPass = (EditText) findViewById(R.id.pass);
         mSign = (Button) findViewById(R.id.submit);
-//        System.out.println("mName"+mName.getText().toString());
-//        System.out.println("mPass"+mPass.getText().toString());
-//        System.out.println();
 
-        mSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //retrieve you stored text;
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString(getString(R.string.uName),null);
+        if(name!=null && !"".equals(name)){
+            mName.setText(name);
+        }
+
+        mSign.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.submit:
+                //暂存姓名
+                String name = mName.getText().toString().trim();
+                if(name != null && !"".equals(name)){
+                    SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(getString(R.string.uName),name);
+                    editor.commit();
+                }
+
+                //登录
                 String url = "http://192.168.56.1:8080/Test/BServlet";
-                new LoginThread(url, mName.getText().toString().trim(),
+                new LoginThread(url, name,
                         mPass.getText().toString().trim())
                         .start();
 
-            }
-        });
+                break;
+        }
     }
 }
