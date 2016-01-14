@@ -46,41 +46,21 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_set"
+        android:id="@+id/ll_more"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
         <Button
-            android:id="@+id/btn_set"
+            android:id="@+id/btn_more"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:clickable="false"
-            android:background="@drawable/ic_setting_white"/>
+            android:background="@drawable/ic_more_white"/>
         <TextView
-            android:id="@+id/tv_set"
-            android:text="设置"
-            android:textColor="#ecf0f1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_cha"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_cha"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:clickable="false"
-            android:background="@drawable/ic_chat_white"/>
-        <TextView
-            android:id="@+id/tv_cha"
-            android:text="对话"
+            android:id="@+id/tv_more"
+            android:text="我"
             android:textColor="#ecf0f1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
