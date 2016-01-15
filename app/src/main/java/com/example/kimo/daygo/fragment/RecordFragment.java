@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.kimo.daygo.R;
 import com.example.kimo.daygo.activity.PlayActivity;
 import com.example.kimo.daygo.adapter.RecordAdapter;
+import com.example.kimo.daygo.http.HttpUtil;
 import com.example.kimo.daygo.model.Record;
 import com.example.kimo.daygo.util.LocationUtils;
 import com.example.kimo.daygo.util.LogUtils;
@@ -31,6 +32,8 @@ import com.example.kimo.daygo.util.MyApplication;
 import com.example.kimo.daygo.util.Utils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import org.apache.http.client.HttpClient;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +60,8 @@ public class RecordFragment extends Fragment {
     private List<String> mList1 = new ArrayList<>();
     private Context context = MyApplication.getContext();
     private View mRootView ;//缓存Fragment View
+    private String filePath = Environment.getExternalStorageDirectory() + File.separator +
+            "DAYGO/video/";
 
     @Nullable
     @Override
@@ -64,12 +69,12 @@ public class RecordFragment extends Fragment {
         //Toast.makeText(context, "又调用一次onCreate", Toast.LENGTH_SHORT).show();
         if(mRootView==null){
             mRootView = inflater.inflate(R.layout.fragment_record, null);
-            File file = new File(Environment.getExternalStorageDirectory() + File.separator +
-                    "DAYGO/video/");
+            File file = new File(filePath);
             Utils.getAllFiles(mList1, file);//取得所有file文件夹下的视频文件名
             for (int i = 0; i < mList1.size(); i++) {//将文件名传到数据源里
                 Record record = new Record(mList1.get(i), LocationUtils.getCurLocationGPS());
                 mList.add(record);
+                LogUtils.logDebug("FileName", mList1.get(i));
             }
             mAdapter = new RecordAdapter(getContext(), mList);
             final ListView listView = (ListView)mRootView.findViewById(R.id.record_lv);
@@ -194,7 +199,8 @@ public class RecordFragment extends Fragment {
     }
 
     private void upload(int position) {
-        Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, ""+mList1.get(position), Toast.LENGTH_SHORT).show();
+        HttpUtil.upload(mList1.get(position), filePath + mList1.get(position));
     }
 
     private void share(int position){

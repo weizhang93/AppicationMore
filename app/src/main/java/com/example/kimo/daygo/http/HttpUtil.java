@@ -17,13 +17,12 @@ import java.io.FileNotFoundException;
  */
 public class HttpUtil {
 
-    public static void upload(String usname,String password,String email){
+
+    public static void upload(String fileName,String filePath){
         AjaxParams params = new AjaxParams();
-        params.put("username", "michael yang");
-        params.put("password", "123456");
-        params.put("email", "test@tsz.net");
+        params.put("fileName", fileName);
         try {
-            params.put("profile_picture", new File("/mnt/sdcard/pic.jpg")); // 上传文件
+            params.put("file", new File(filePath)); // 上传文件
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -31,7 +30,7 @@ public class HttpUtil {
         //params.put("profile_picture3", new ByteArrayInputStream(bytes)); // 提交字节流
 
         FinalHttp fh = new FinalHttp();
-        fh.post("http://www.yangfuhai.com", params, new AjaxCallBack<Object>() {
+        fh.post("http://192.168.56.1:8080/dayGO/AServlet", params, new AjaxCallBack<Object>() {
             @Override
             public void onLoading(long count, long current) {
                 LogUtils.logDebug(count + "/" + current);
@@ -39,7 +38,7 @@ public class HttpUtil {
 
             @Override
             public void onSuccess(Object o) {
-                LogUtils.logDebug(o==null?"null":o+"");
+                LogUtils.logDebug(o==null?"null":"UploadSuccess!");
             }
         });
     }
