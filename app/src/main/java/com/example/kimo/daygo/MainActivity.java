@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.kimo.daygo.fragment.MoreFragment;
+import com.example.kimo.daygo.fragment.CameraFragment;
+import com.example.kimo.daygo.fragment.ChatFragment;
 import com.example.kimo.daygo.fragment.RecordFragment;
+import com.example.kimo.daygo.fragment.SettingFragment;
 import com.example.kimo.daygo.fragment.VideoFragment;
 import com.example.kimo.daygo.util.Utils;
 
@@ -27,16 +29,18 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
 
     private LinearLayout mCamLayout;
     private LinearLayout mRecLayout;
-    private LinearLayout mMoreLayout;
+    private LinearLayout mSetLayout;
+    private LinearLayout mChaLayout;
 
     private Button mCamBtn;
     private Button mRecBtn;
-    private Button mMoreBtn;
+    private Button mSetBtn;
+    private Button mChaBtn;
 
     private TextView mCamText;
     private TextView mRecText;
-    private TextView mMoreText;
-
+    private TextView mSetText;
+    private TextView mChaText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,8 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
     private void initEvent() {
         mRecLayout.setOnClickListener(this);
         mCamLayout.setOnClickListener(this);
-        mMoreLayout.setOnClickListener(this);
+        mSetLayout.setOnClickListener(this);
+        mChaLayout.setOnClickListener(this);
     }
 
     private void initView() {
@@ -58,25 +63,30 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
 
         mRecLayout = (LinearLayout) findViewById(R.id.ll_rec);
         mCamLayout = (LinearLayout) findViewById(R.id.ll_cam);
-        mMoreLayout = (LinearLayout) findViewById(R.id.ll_more);
+        mSetLayout = (LinearLayout) findViewById(R.id.ll_set);
+        mChaLayout = (LinearLayout) findViewById(R.id.ll_cha);
 
         mRecBtn = (Button) findViewById(R.id.btn_rec);
         mCamBtn = (Button) findViewById(R.id.btn_cam);
-        mMoreBtn = (Button) findViewById(R.id.btn_more);
+        mSetBtn = (Button) findViewById(R.id.btn_set);
+        mChaBtn = (Button) findViewById(R.id.btn_cha);
 
         mRecText = (TextView) findViewById(R.id.tv_rec);
         mCamText = (TextView) findViewById(R.id.tv_cam);
-        mMoreText = (TextView) findViewById(R.id.tv_more);
+        mSetText = (TextView) findViewById(R.id.tv_set);
+        mChaText = (TextView) findViewById(R.id.tv_cha);
 
 
         //为数据源添加数据
         mFragmentList = new ArrayList<Fragment>();
         Fragment mTabRec = new RecordFragment();
         Fragment mTabCam = new VideoFragment();
-        Fragment mTabSet = new MoreFragment();
+        Fragment mTabSet = new SettingFragment();
+        Fragment mTabCha = new ChatFragment();
         mFragmentList.add(mTabRec);
         mFragmentList.add(mTabCam);
         mFragmentList.add(mTabSet);
+        mFragmentList.add(mTabCha);
 
         //初始化适配器
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -123,8 +133,11 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
             case R.id.ll_cam:
                 setSelect(1);
                 break;
-            case R.id.ll_more:
+            case R.id.ll_set:
                 setSelect(2);
+                break;
+            case R.id.ll_cha:
+                setSelect(3);
                 break;
         }
     }
@@ -132,10 +145,12 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
     private void resetColers() {
         mCamBtn.setBackground(getResources().getDrawable(R.drawable.ic_video_white));
         mRecBtn.setBackground(getResources().getDrawable(R.drawable.ic_record_white));
-        mMoreBtn.setBackground(getResources().getDrawable(R.drawable.ic_more_white));
+        mSetBtn.setBackground(getResources().getDrawable(R.drawable.ic_setting_white));
+        mChaBtn.setBackground(getResources().getDrawable(R.drawable.ic_chat_white));
         mCamText.setTextColor(Color.parseColor("#ecf0f1"));
         mRecText.setTextColor(Color.parseColor("#ecf0f1"));
-        mMoreText.setTextColor(Color.parseColor("#ecf0f1"));
+        mSetText.setTextColor(Color.parseColor("#ecf0f1"));
+        mChaText.setTextColor(Color.parseColor("#ecf0f1"));
     }
 
     private void setSelect(int i){
@@ -151,8 +166,12 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
                 mCamText.setTextColor(Color.parseColor("#FF30BF10"));
             break;
             case 2:
-                mMoreBtn.setBackground(getResources().getDrawable(R.drawable.ic_more_green));
-                mMoreText.setTextColor(Color.parseColor("#FF30BF10"));
+                mSetBtn.setBackground(getResources().getDrawable(R.drawable.ic_setting_green));
+                mSetText.setTextColor(Color.parseColor("#FF30BF10"));
+                break;
+            case 3:
+                mChaBtn.setBackground(getResources().getDrawable(R.drawable.ic_chat_green));
+                mChaText.setTextColor(Color.parseColor("#FF30BF10"));
                 break;
         }
         mViewPager.setCurrentItem(i);//切换Tab

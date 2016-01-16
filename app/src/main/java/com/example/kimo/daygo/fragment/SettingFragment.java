@@ -43,7 +43,6 @@ public class SettingFragment extends Fragment {
     private static final int REQ_2 = 2;
     private String mFilePath;
     private Context context = MyApplication.getContext();
-    private String isChange;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
