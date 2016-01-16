@@ -36,8 +36,6 @@
         <activity android:name=".activity.VideoActivity"></activity>
         <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.PlayActivity"></activity>
-        <activity android:name=".activity.FeedbackActivity"></activity>
-        <activity android:name=".activity.PersonInfoActivity"></activity>
     </application>
 
 </manifest>

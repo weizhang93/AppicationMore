@@ -183,7 +183,7 @@ public class MovieRecorderView extends LinearLayout implements MediaRecorder.OnE
         }
         File vecordDir = sampleDir;
         // 创建文件
-        String date = Utils.dataFormat("yy_MM_dd_ss");//1.5 yy_MM_dd
+        String date = Utils.dataFormat("yy_MM_dd");
         //mVecordFile = File.createTempFile("DG_" +date, ".mp4", vecordDir);//mp4格式
         mVecordFile = new File(vecordDir,"DG_" +date+".mp4");
         LogUtils.logDebug(mVecordFile.getAbsolutePath());
