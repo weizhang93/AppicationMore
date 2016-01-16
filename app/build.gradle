@@ -26,4 +26,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile files('libs/gson-2.1.jar')
+    compile project(':library_pullToRefresh')
+    compile files('libs/afinal_0.5.1_bin.jar')
 }
