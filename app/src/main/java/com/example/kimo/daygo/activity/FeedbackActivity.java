@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/1/5 0005.
+ * 消息反馈类
+ *
  */
 public class FeedbackActivity extends Activity {
 

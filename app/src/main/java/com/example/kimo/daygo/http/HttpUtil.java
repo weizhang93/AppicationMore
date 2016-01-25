@@ -30,7 +30,7 @@ public class HttpUtil {
         //params.put("profile_picture3", new ByteArrayInputStream(bytes)); // 提交字节流
 
         FinalHttp fh = new FinalHttp();
-        fh.post("http://192.168.56.1:8080/dayGO/AServlet", params, new AjaxCallBack<Object>() {
+        fh.post("http://115.28.159.171:8080/dayGO/FileReceiveServlet", params, new AjaxCallBack<Object>() {
             @Override
             public void onLoading(long count, long current) {
                 LogUtils.logDebug(count + "/" + current);

@@ -35,6 +35,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/16 0016.
+ * 无用类，相机操作
  */
 public class SettingFragment extends Fragment {
     private ListView listView ;
@@ -73,17 +74,6 @@ public class SettingFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                switch (list.get(position)){
-//                    case "set1":
-//                        LogUtils.logDebug("1111");
-//                        break;
-//                    case "set2":
-//                        LogUtils.logDebug("2222");
-//                        break;
-//                    case "set3":
-//                        LogUtils.logDebug("3333");
-//                        break;
-//                }
                 switch (position){
                     case 0:
                         LogUtils.logDebug("1111");

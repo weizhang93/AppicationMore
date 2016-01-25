@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".util.BootPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
@@ -32,12 +32,14 @@
                 android:value=".MainActivity">
             </meta-data>
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".activity.HttpActivity"></activity>
         <activity android:name=".activity.VideoActivity"></activity>
         <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.PlayActivity"></activity>
         <activity android:name=".activity.FeedbackActivity"></activity>
         <activity android:name=".activity.PersonInfoActivity"></activity>
+        <activity android:name=".activity.AnimotionViewPagerActivity"></activity>
     </application>
 
 </manifest>

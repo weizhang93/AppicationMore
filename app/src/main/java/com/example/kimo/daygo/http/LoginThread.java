@@ -67,6 +67,7 @@ public class LoginThread extends Thread {
             OutputStream out = conn.getOutputStream();
             String content = "arg0="+arg0+"&arg1="+arg1;
             out.write(content.getBytes());
+            out.close();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String str;

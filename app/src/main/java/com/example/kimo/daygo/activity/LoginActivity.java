@@ -2,15 +2,24 @@ package com.example.kimo.daygo.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.kimo.daygo.MainActivity;
 import com.example.kimo.daygo.R;
 import com.example.kimo.daygo.http.LoginThread;
+import com.example.kimo.daygo.util.LogUtils;
 
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +34,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private EditText mName;
     private EditText mPass;
     private Button mSign;
+    private Handler mHandler = new Handler();
+    private boolean isSuccess = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +73,28 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     editor.commit();
                 }
 
-                //登录
-                String url = "http://192.168.56.1:8080/Test/BServlet";
-                new LoginThread(url, name,
-                        mPass.getText().toString().trim())
-                        .start();
-
-                break;
+//                //登录
+//                FinalHttp fh = new FinalHttp();
+//                fh.get("http://192.168.56.1:8080/dayGO/FileReceiveServlet"+"?arg0="+name+"&arg1="+mPass.getText
+//                    () ,new
+//                        AjaxCallBack<String>() {
+//
+//                    @Override
+//                    public void onLoading(long count, long current) { //每1秒钟自动被回调一次
+//                        LogUtils.logDebug(current + "/" + count);
+//                    }
+//
+//                    public void onSuccess(String s) {
+//                        LogUtils.logDebug("receive msg",s);
+//
+//                    }
+//
+//                });
+                if(!isSuccess){
+                    Toast.makeText(LoginActivity.this, "login failed", Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(new Intent(this, MainActivity.class));
+                }
         }
     }
 }
