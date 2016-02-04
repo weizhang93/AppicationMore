@@ -17,25 +17,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/user_normal_title"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/btn_play_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="播放"/>
         <Button
             android:id="@+id/btn_pause_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="暂停"/>
+            android:text="暂停"
+            android:textColor="#80bebebe"
+            android:background="@drawable/shape"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"/>
+        <Button
+            android:id="@+id/btn_play_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="播放"
+            android:textColor="#80bebebe"
+            android:background="@drawable/shape"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
         <Button
             android:id="@+id/btn_stop_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="停止"/>
+            android:text="停止"
+            android:textColor="#80bebebe"
+            android:background="@drawable/shape"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"/>
 
 
     </LinearLayout>

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -32,10 +34,13 @@ import java.util.List;
  */
 public class AnimotionViewPagerActivity extends Activity {
 
+    static final String TAG = "AnimotionViewPagerActivity";
+
     private ViewPager mViewPager;
     private int[] mImgIds = {R.drawable.t1,R.drawable.t4,R.drawable
             .t6};
     private List<ImageView> mImageViewList = new ArrayList<>();
+    private List<LinearLayout> mLinearLayout = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class AnimotionViewPagerActivity extends Activity {
         mViewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 4;
+                return mImgIds.length;
             }
 
             @Override
@@ -60,24 +65,26 @@ public class AnimotionViewPagerActivity extends Activity {
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
-                if(position<mImgIds.length) {
-                    LogUtils.logDebug(position + "");
-                    ImageView imageView = new ImageView(AnimotionViewPagerActivity.this);
-                    imageView.setImageResource(mImgIds[position]);
-                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    container.addView(imageView);
-                    mImageViewList.add(imageView);
-                    return imageView;
-                }else if(position==mImgIds.length){
-                    LinearLayout ll = new LinearLayout(AnimotionViewPagerActivity.this);
-                    ll.setGravity(Gravity.CENTER);
-                    ll.setBackground(getResources().getDrawable(R.drawable.t4));
 
+//                    LogUtils.logDebug(position + "");
+//                    ImageView imageView = new ImageView(AnimotionViewPagerActivity.this);
+//                    imageView.setImageResource(mImgIds[position]);
+//                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//                    container.addView(imageView);
+//                    mImageViewList.add(imageView);
+//                    return imageView;
+//                ///****************
+                LinearLayout ll = new LinearLayout(AnimotionViewPagerActivity.this);
+                ll.setGravity(Gravity.CENTER);
+                ll.setBackground(getResources().getDrawable(mImgIds[position]));
+
+                if(position == mImgIds.length-1){
                     Button button = new Button(AnimotionViewPagerActivity.this);
                     button.setText("点击登录");
                     ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup
-                            .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            .LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     button.setLayoutParams(params);
+                    ll.addView(button);
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -85,22 +92,30 @@ public class AnimotionViewPagerActivity extends Activity {
                                     LoginActivity.class));
                         }
                     });
-
-                    ViewGroup.LayoutParams params1 = new ViewGroup.LayoutParams(ViewGroup
-                            .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    ll.setLayoutParams(params1);
-                    ll.addView(button);
-
-                    container.addView(ll);
-                    return ll;
                 }
-                return null;
+
+
+                ViewGroup.LayoutParams params1 = new ViewGroup.LayoutParams(ViewGroup
+                        .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                ll.setLayoutParams(params1);
+                mLinearLayout.add(ll);
+
+                container.addView(ll);
+                return ll;
+                /////****************
             }
 
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(mImageViewList.get(position));
+                container.removeView(mLinearLayout.get(position));
             }
+
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
     }
 }

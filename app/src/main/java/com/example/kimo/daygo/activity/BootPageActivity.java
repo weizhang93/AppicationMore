@@ -1,4 +1,4 @@
-package com.example.kimo.daygo.util;
+package com.example.kimo.daygo.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,16 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 
 import com.example.kimo.daygo.MainActivity;
 import com.example.kimo.daygo.R;
-import com.example.kimo.daygo.activity.AnimotionViewPagerActivity;
-import com.example.kimo.daygo.activity.LoginActivity;
-import com.example.kimo.daygo.http.LoginThread;
-
-import java.util.Map;
-import java.util.Set;
+import com.example.kimo.daygo.util.LogUtils;
+import com.example.kimo.daygo.util.MyApplication;
 
 /**
  * Created by Administrator on 2016/1/16 0016.
@@ -45,9 +40,14 @@ public class BootPageActivity extends Activity{
     };
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bootpage);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("setting",
                 Context.MODE_PRIVATE);
@@ -66,13 +66,13 @@ public class BootPageActivity extends Activity{
         if(isFirstRun){
             editor.putBoolean("isFirstRun", false);
             editor.commit();
-            //进入引导动画,延迟3秒
+            //进入引导动画,延迟0.5秒
             mHandler.sendEmptyMessageDelayed(SWITCH_GUIDEACTIVITY, 500);
 
         }else{
-            //进入主界面,延迟3秒
-            LogUtils.logDebug(""+isFirstRun);
-            mHandler.sendEmptyMessageDelayed(SWITCH_MAINACTIVITY,500);
+            //进入主界面,延迟0秒
+            LogUtils.logDebug("" + isFirstRun);
+            mHandler.sendEmptyMessageDelayed(SWITCH_MAINACTIVITY,0);
 
         }
 

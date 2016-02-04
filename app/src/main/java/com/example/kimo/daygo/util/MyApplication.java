@@ -2,7 +2,9 @@ package com.example.kimo.daygo.util;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.ArrayList;
 
@@ -35,4 +37,5 @@ public class MyApplication extends Application {
     public static Context getContext(){
         return context;
     }
+
 }

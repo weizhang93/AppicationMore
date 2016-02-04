@@ -1,13 +1,19 @@
 package com.example.kimo.daygo;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,12 +21,17 @@ import android.widget.TextView;
 import com.example.kimo.daygo.fragment.MoreFragment;
 import com.example.kimo.daygo.fragment.RecordFragment;
 import com.example.kimo.daygo.fragment.VideoFragment;
+import com.example.kimo.daygo.ui.TitleLayout;
+import com.example.kimo.daygo.util.MyApplication;
 import com.example.kimo.daygo.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity  extends FragmentActivity implements View.OnClickListener {
+
+    private TitleLayout mTitleLayout;
+
     private ViewPager mViewPager;
     private FragmentPagerAdapter mAdapter;//适配器
     private List<Fragment> mFragmentList;//数据源
@@ -54,6 +65,11 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
     }
 
     private void initView() {
+
+        mTitleLayout = (TitleLayout) findViewById(R.id.tl_title);
+        ViewGroup wraper = (ViewGroup) mTitleLayout.getChildAt(0);
+        Button btnBack = (Button) wraper.getChildAt(0);
+        btnBack.setVisibility(View.GONE);
         mViewPager = (ViewPager) findViewById(R.id.vp_content);
 
         mRecLayout = (LinearLayout) findViewById(R.id.ll_rec);
@@ -77,6 +93,7 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
         mFragmentList.add(mTabRec);
         mFragmentList.add(mTabCam);
         mFragmentList.add(mTabSet);
+
 
         //初始化适配器
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -158,4 +175,30 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
         mViewPager.setCurrentItem(i);//切换Tab
     }
 
+    //菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        new AlertDialog.Builder(this).setTitle(R.string.areyousure)
+                .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.this.finish();
+                        MyApplication.removeAllActivity();
+                    }
+                })
+                .show();
+    }
 }

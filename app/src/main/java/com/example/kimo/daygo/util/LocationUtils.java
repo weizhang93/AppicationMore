@@ -9,15 +9,22 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+
 
 /**
  * Created by Wei.zhang on 2015/12/25 0025.
  * 位置工具类
  * 取得当前位置（）
  */
-public class LocationUtils {
+public class LocationUtils  {
 
-    private static Location mlocation = null ;
+    //原生
+    private static Location mlocation = null;
+
     public static String getCurLocationGPS() {
         Context context = MyApplication.getContext();
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -57,11 +64,10 @@ public class LocationUtils {
             }
         });
 
-        if(mlocation!=null){
-            String loc = "la:"+mlocation.getLatitude()+",lo:"+mlocation.getLongitude();
+        if (mlocation != null) {
+            String loc = "la:" + mlocation.getLatitude() + ",lo:" + mlocation.getLongitude();
             return loc;
         }
         return "no address!";
     }
-
 }

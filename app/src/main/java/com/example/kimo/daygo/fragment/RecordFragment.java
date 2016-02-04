@@ -21,6 +21,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationListener;
 import com.example.kimo.daygo.R;
 import com.example.kimo.daygo.activity.PlayActivity;
 import com.example.kimo.daygo.adapter.RecordAdapter;
@@ -36,7 +39,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import org.apache.http.client.HttpClient;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -63,6 +68,9 @@ public class RecordFragment extends Fragment {
     private String filePath = Environment.getExternalStorageDirectory() + File.separator +
             "DAYGO/video/";
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +80,8 @@ public class RecordFragment extends Fragment {
             File file = new File(filePath);
             Utils.getAllFiles(mList1, file);//取得所有file文件夹下的视频文件名
             for (int i = 0; i < mList1.size(); i++) {//将文件名传到数据源里
-                Record record = new Record(mList1.get(i), LocationUtils.getCurLocationGPS());
+                //Record record = new Record(mList1.get(i), LocationUtils.getCurLocationGPS());
+                Record record = new Record(mList1.get(i), getLocationByRecName());
                 mList.add(record);
                 LogUtils.logDebug("FileName", mList1.get(i));
             }
@@ -160,9 +169,12 @@ public class RecordFragment extends Fragment {
             parent.removeView(mRootView);
         }
 
-
-
         return mRootView;
+    }
+
+    private String getLocationByRecName() {
+
+        return null;
     }
 //
 //    private void playVideo(String s) {
@@ -210,4 +222,6 @@ public class RecordFragment extends Fragment {
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
+
+
 }
